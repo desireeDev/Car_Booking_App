@@ -26,7 +26,7 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        La partie peut commencer, vous pouvez maintenant créer votre application de réservation de voiture.
       </p>
     </>
   )

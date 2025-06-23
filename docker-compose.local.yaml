@@ -5,6 +5,7 @@ services:
     build:
       context: ./car_booking/frontend           # Le dossier contenant le code React
       dockerfile: ../../docker/react/Dockerfile_react  # Dockerfile situé dans docker/react/
+    container_name: react_car_app
     ports:
       - "3000:3000"                              # Expose Vite sur le port 3000
     volumes:
@@ -17,6 +18,7 @@ services:
     build:
       context: ./car_booking/backend             # Dossier avec le code Symfony
       dockerfile: ../../docker/symfony/Dockerfile_symfony
+    container_name: symfony_car_app
     ports:
       - "8000:8000"                              # Symfony exposé sur le port 8000
     volumes:
@@ -51,6 +53,8 @@ services:
     build:
       context: .                                 # Contexte à la racine du projet
       dockerfile: ./docker/nginx/Dockerfile_nginx
+    container_name: nginx_car_app
+    
     ports:
       - "80:80"                                  # Reverse proxy sur localhost
     volumes:
