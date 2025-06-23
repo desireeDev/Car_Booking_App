@@ -1,0 +1,3 @@
+# docker/nginx/Dockerfile_nginx
+
+FROM nginx:latest

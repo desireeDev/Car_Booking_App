@@ -1,0 +1,20 @@
+# docker/react/Dockerfile_react
+
+FROM node:20
+
+WORKDIR /app
+
+# Étape 1 : copier les fichiers de dépendances
+COPY package*.json ./
+
+# Étape 2 : nettoyer node_modules s'il y en avait (par sécurité dans le cache Docker)
+RUN rm -rf node_modules && npm install
+
+# Étape 3 : copier le reste des fichiers (src, public, vite.config.js...)
+COPY . .
+
+# Étape 4 : exposer le port utilisé par Vite
+EXPOSE 3000
+
+# Étape 5 : lancer Vite
+CMD ["npx", "vite", "--host","--port", "3000"]

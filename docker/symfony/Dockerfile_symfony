@@ -1,0 +1,28 @@
+# docker/symfony/Dockerfile_symfony
+
+# Utilise une image officielle PHP 8.2 avec CLI
+FROM php:8.2-cli
+
+# Crée le dossier de travail à l’intérieur du conteneur
+WORKDIR /app
+
+# Installe les extensions PHP nécessaires à Symfony et Doctrine
+RUN apt-get update && apt-get install -y \
+    git unzip zip libpq-dev libzip-dev libonig-dev libxml2-dev \
+    libcurl4-openssl-dev mariadb-client \
+    && docker-php-ext-install pdo pdo_mysql
+
+# Récupère Composer depuis l’image officielle
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copie le code Symfony (grâce au context ./car_booking/backend)
+COPY . .
+
+# Installe les dépendances Symfony
+RUN composer install
+
+# Expose le port 8000 pour le serveur PHP interne
+EXPOSE 8000
+
+# Lance le serveur Symfony (en dev) à la racine "public"
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
