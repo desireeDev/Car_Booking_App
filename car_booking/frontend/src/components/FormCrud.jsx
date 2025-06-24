@@ -6,11 +6,13 @@ import "../styles/FormCrud.css";
 
 
 function FormCrud({ action }) {
+  // State to manage form data 
   const [formData, setFormData] = useState({
     id: "",
     marque: "",
     modele: "",
     plaque: ""
+    
   });
   const [message, setMessage] = useState("");
   const [carsList, setCarsList] = useState([]);
@@ -121,6 +123,7 @@ const handleSubmit = async (e) => {
         );
       case "read":
         return (
+
           <table className="car-table">
   <thead>
     <tr>
@@ -149,6 +152,7 @@ const handleSubmit = async (e) => {
 
   return (
     <div className="crud-form-container">
+     
       <form onSubmit={handleSubmit} className="form-crud">
         <h2>{action.toUpperCase()} une voiture</h2>
         {renderFields()}
@@ -160,9 +164,10 @@ const handleSubmit = async (e) => {
         {message && <p className="feedback">{message}</p>}
       </form>
     </div>
+    
   );
 }
-
+//Nouvelle version de React demande l'importation de PropTypes before use
 FormCrud.propTypes = {
   action: PropTypes.string.isRequired
 };
