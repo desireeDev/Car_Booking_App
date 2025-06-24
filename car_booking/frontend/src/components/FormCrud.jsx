@@ -1,4 +1,4 @@
-// src/components/FormCrud.jsx
+/* // src/components/FormCrud.jsx
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "../styles/FormCrud.css";
@@ -123,5 +123,122 @@ function FormCrud({ action }) {
 FormCrud.propTypes = {
   action: PropTypes.string.isRequired
 };
+
+export default FormCrud;
+ */
+import { useEffect, useState } from "react";
+import Add from "../components/Add";
+import Update from "../components/Update";
+import Delete from "../components/Delete";
+import Book from "../components/Book";
+import "../styles/CarList.css";
+
+function FormCrud() {
+  const [cars, setCars] = useState([]);
+  const [selectedCar, setSelectedCar] = useState(null);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showReservationForm, setShowReservationForm] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/cars")
+      .then((res) => res.json())
+      .then((data) => setCars(data))
+      .catch((err) => console.error("Erreur API :", err));
+  }, []);
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:3001/voitures/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setCars((prev) => prev.filter((car) => car.id !== id));
+      })
+      .catch((err) => console.error("Erreur suppression :", err));
+  };
+  return (
+    <div className="carlist-container">
+  
+      <div className="page-banner">
+        <img src="src/assets/images/portob.png" alt="Voitures" />
+      </div>
+
+      <h1>Liste des voitures</h1>
+      <div className="carlist-header-buttons">
+        <button onClick={() => setShowReservationForm(true)}>Réserver</button>
+        <button onClick={() => setShowAddForm(true)}>
+          Ajouter
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Marque</th>
+            <th>Modèle</th>
+            <th>Plaque</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {cars.map((car) => (
+            <tr key={car.id}>
+              <td>{car.brand}</td>
+              <td>{car.modele}</td>
+              <td>{car.licensePlate}</td>
+              <td>
+                <button
+                  onClick={() => {
+                    setSelectedCar(car);
+                    setShowUpdateForm(true);
+                  }}
+                >
+                  Modifier
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedCar(car);
+                    setShowDeleteModal(true);
+                  }}
+                >
+                  ❌
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {showUpdateForm && selectedCar && (
+        <Update
+          car={selectedCar}
+          onClose={() => setShowUpdateForm(false)}
+          onSubmit={(updatedCar) => {
+            setCars((prev) =>
+              prev.map((c) => (c.id === updatedCar.id ? updatedCar : c))
+            );
+          }}
+        />
+      )}
+
+      {showDeleteModal && selectedCar && (
+        <Delete
+          car={selectedCar}
+          onClose={() => setShowDeleteModal(false)}
+          onConfirm={handleDelete}
+        />
+      )}
+
+      {showReservationForm && (
+        <Book onClose={() => setShowReservationForm(false)} />
+      )}
+      
+       {showAddForm && (
+        <Add onClose={() => setShowAddForm(false)} />
+      )}
+    </div>
+  );
+}
 
 export default FormCrud;

@@ -1,0 +1,93 @@
+.carlist-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.carlist-header-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.carlist-header-buttons button {
+  padding: 8px 16px;
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carlist-header-buttons button:hover {
+  background-color: #c0392b;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+thead th {
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+img {
+  width: 100px;
+  height: auto;
+  border-radius: 6px;
+}
+
+td button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+td button:first-child {
+  background-color: #ffc107;
+  color: #333;
+}
+
+td button:first-child:hover {
+  background-color: #e0a800;
+}
+
+td button:last-child {
+  background-color: #e74c3c;
+  color: white;
+}
+
+td button:last-child:hover {
+  background-color: #c0392b;
+}
+.page-banner {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.page-banner img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
