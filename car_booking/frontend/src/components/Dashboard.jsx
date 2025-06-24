@@ -4,25 +4,30 @@ import FormCrud from "../components/FormCrud";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
-  // State to manage the selected action
-  // Options: "create", "read", "update", "delete"
-  const [selectedAction, setSelectedAction] = useState("create");
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handlePopupOpen = () => setShowPopup(true);
+  const handlePopupClose = () => setShowPopup(false);
 
   return (
     <div className="dashboard">
-      <h1>Gestion des voitures</h1>
-      <select
-        value={selectedAction}
-        onChange={(e) => setSelectedAction(e.target.value)}
-        className="select-action"
-      >
-        <option value="create">Créer</option>
-        <option value="read">Lire</option>
-        <option value="update">Mettre à jour</option>
-        <option value="delete">Supprimer</option>
-      </select>
+      <div className="dashboard-header">
+        <h1>Gestion des voitures</h1>
+        <button className="create-btn" onClick={handlePopupOpen}>+ Créer une voiture</button>
+      </div>
 
-      <FormCrud action={selectedAction} />
+      {/* Affichage du tableau des voitures */}
+      <FormCrud action="read" />
+
+      {/* Popup du formulaire de création */}
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <button className="close-btn" onClick={handlePopupClose}>×</button>
+            <FormCrud action="create" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -22,6 +22,9 @@ class Car
     #[ORM\Column(length: 255)]
     private ?string $licensePlate = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isAvailable = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,17 @@ class Car
     {
         $this->licensePlate = $licensePlate;
 
+        return $this;
+    }
+
+      public function isAvailable(): bool
+    {
+        return $this->isAvailable;
+    }
+
+    public function setIsAvailable(bool $isAvailable): self
+    {
+        $this->isAvailable = $isAvailable;
         return $this;
     }
 }

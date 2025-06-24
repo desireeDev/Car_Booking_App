@@ -49,4 +49,19 @@ class CarController extends AbstractController
 
             return new JsonResponse($data);
         }
+    
+    #[Route('/api/cars/{id}', name: 'delete_car', methods: ['DELETE'])]
+    public function delete(int $id, EntityManagerInterface $em): JsonResponse
+    {
+        $car = $em->getRepository(Car::class)->find($id);
+
+        if (!$car) {
+            return new JsonResponse(['error' => 'Voiture non trouvée'], 404);
+        }
+
+        $em->remove($car);
+        $em->flush();
+
+        return new JsonResponse(['message' => 'Voiture supprimée'], 200);
+    }
 }
