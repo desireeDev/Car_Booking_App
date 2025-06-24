@@ -1,10 +1,10 @@
 .crud-form-container {
   display: flex;
-  justify-content: center;
+  justify-content: right;
   padding: 2rem;
   background-color: #fdfdfd;
   border-radius: 16px;
-  max-width: 600px;
+  max-width: 700px;
   margin: auto;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
@@ -19,7 +19,7 @@
   margin-bottom: 1.5rem;
   font-size: 1.6rem;
   text-align: center;
-  color: #333;
+  color: #e41b1b;
 }
 
 .form-crud input {
@@ -57,7 +57,7 @@
   margin-top: 1rem;
   font-weight: 600;
   text-align: center;
-  color: #2e7d32;
+  color: #cd4b5a;
   animation: fadeIn 0.4s ease-in-out;
 }
 

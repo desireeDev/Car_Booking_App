@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 import "../styles/FormCrud.css";
 
 function FormCrud({ action }) {
+  // State to manage form data 
   const [formData, setFormData] = useState({
     id: "",
     marque: "",
     modele: "",
     plaque: ""
+    
   });
   const [message, setMessage] = useState("");
 
@@ -24,13 +26,13 @@ function FormCrud({ action }) {
       let msg = "";
       switch (action) {
         case "create":
-          msg = "✅ Voiture ajoutée avec succès !";
+          msg = "La voiture a été ajoutée avec succès !";
           break;
         case "update":
-          msg = "🔄 Voiture mise à jour !";
+          msg = "La  voiture  a été mise à jour !";
           break;
         case "delete":
-          msg = "🗑️ Voiture supprimée !";
+          msg = "La voiture a été  supprimée !";
           break;
         default:
           msg = "";
@@ -92,7 +94,7 @@ function FormCrud({ action }) {
       case "read":
         return (
           <p className="read-text">
-            📄 Liste des voitures à venir (connexion à la base de données en cours)...
+             Liste des voitures à venir (Récuperation des données via API)
           </p>
         );
       default:
@@ -102,6 +104,7 @@ function FormCrud({ action }) {
 
   return (
     <div className="crud-form-container">
+     
       <form onSubmit={handleSubmit} className="form-crud">
         <h2>{action.toUpperCase()} une voiture</h2>
         {renderFields()}
@@ -113,9 +116,10 @@ function FormCrud({ action }) {
         {message && <p className="feedback">{message}</p>}
       </form>
     </div>
+    
   );
 }
-
+//Nouvelle version de React demande l'importation de PropTypes before use
 FormCrud.propTypes = {
   action: PropTypes.string.isRequired
 };

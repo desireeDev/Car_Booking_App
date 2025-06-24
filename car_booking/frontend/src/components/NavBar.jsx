@@ -9,6 +9,7 @@ function Navbar() {
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/dashboard">Fonctionnalités</Link></li>
+        <li><Link to="/contact">Visualisation</Link></li>
         <li><Link to="/about">À propos</Link></li>
         <li><Link to="/contact">Contact</Link></li>
       </ul>

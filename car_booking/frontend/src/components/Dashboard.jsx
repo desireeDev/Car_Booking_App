@@ -4,6 +4,8 @@ import FormCrud from "../components/FormCrud";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
+  // State to manage the selected action
+  // Options: "create", "read", "update", "delete"
   const [selectedAction, setSelectedAction] = useState("create");
 
   return (
