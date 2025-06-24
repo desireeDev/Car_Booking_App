@@ -1,7 +1,9 @@
 // src/components/FormCrud.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../styles/FormCrud.css";
+
+
 
 function FormCrud({ action }) {
   const [formData, setFormData] = useState({
@@ -11,35 +13,63 @@ function FormCrud({ action }) {
     plaque: ""
   });
   const [message, setMessage] = useState("");
+  const [carsList, setCarsList] = useState([]);
+
+
+  useEffect(() => {
+  if (action === "read") {
+    fetch("http://localhost:8000/api/cars")
+      .then((res) => res.json())
+      .then((data) => setCarsList(data))
+      .catch((err) => {
+        console.error(err);
+        setCarsList([]);
+      });
+  }
+}, [action]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setTimeout(() => {
-      let msg = "";
-      switch (action) {
-        case "create":
-          msg = "✅ Voiture ajoutée avec succès !";
-          break;
-        case "update":
-          msg = "🔄 Voiture mise à jour !";
-          break;
-        case "delete":
-          msg = "🗑️ Voiture supprimée !";
-          break;
-        default:
-          msg = "";
+  try {
+    let msg = "";
+
+    if (action === "create") {
+      const response = await fetch("http://localhost:8000/api/cars", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          brand: formData.marque,
+          model: formData.modele,
+          licensePlate: formData.plaque,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'enregistrement");
       }
 
-      setMessage(msg);
-      setFormData({ id: "", marque: "", modele: "", plaque: "" });
-    }, 800);
-  };
+      const data = await response.json();
+      msg = `✅ ${data.message}`;
+    }
+
+
+    setMessage(msg);
+    setFormData({ id: "", marque: "", modele: "", plaque: "" });
+
+  } catch (error) {
+    console.error(error);
+    setMessage("❌ Une erreur est survenue.");
+  }
+};
+
 
   const renderFields = () => {
     switch (action) {
@@ -91,9 +121,26 @@ function FormCrud({ action }) {
         );
       case "read":
         return (
-          <p className="read-text">
-            📄 Liste des voitures à venir (connexion à la base de données en cours)...
-          </p>
+          <table className="car-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Marque</th>
+      <th>Modèle</th>
+      <th>Plaque</th>
+    </tr>
+  </thead>
+  <tbody>
+    {carsList.map((car) => (
+      <tr key={car.id}>
+        <td>{car.id}</td>
+        <td>{car.brand}</td>
+        <td>{car.model}</td>
+        <td>{car.licensePlate}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
         );
       default:
         return null;
