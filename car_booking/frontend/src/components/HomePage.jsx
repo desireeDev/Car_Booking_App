@@ -11,7 +11,7 @@ function HomePage() {
           <h2>RÉSERVEZ LA VOITURE DE VOS RÊVES EN UN SEUL CLIC</h2>
           <p>
             Découvrez notre large gamme de véhicules et trouvez celui qui vous convient. 
-            Donnez-lui une chance de briller sur la route avec la plateforme car_booking.
+            Donnez-lui une chance de briller sur la route avec la plateforme car_dealer.
           </p>
         </div>
         <div className="hero-right">

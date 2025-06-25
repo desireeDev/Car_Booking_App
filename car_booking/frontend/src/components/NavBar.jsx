@@ -23,7 +23,7 @@ function Navbar() {
             <Link to="/dashboard"> Dashboard <span className="dropdown-arrow">&#9660;</span></Link>
           </li>
           <li className="nav-item has-dropdown active"> 
-            <Link to="/contact"> Reserver <span className="dropdown-arrow">&#9660;</span></Link>
+            <Link to="/reservation"> Réserver <span className="dropdown-arrow">&#9660;</span></Link>
           </li>
           <li className="nav-item has-dropdown">
             <Link to="/about"> Nos voitures <span className="dropdown-arrow">&#9660;</span></Link>
@@ -33,8 +33,7 @@ function Navbar() {
           </li>
         </ul>
 
-
-        <button className="add-car-button">Réserver une voiture</button>
+     <Link to="/reservation"><button className="add-car-button">Réserver une voiture</button></Link>
       </div>
     </nav>
   );
