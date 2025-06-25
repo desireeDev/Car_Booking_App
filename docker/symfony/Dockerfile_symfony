@@ -19,7 +19,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . .
 
 # Installe les dépendances Symfony
-RUN composer install
+RUN composer install --no-interaction --prefer-dist
 
 # Expose le port 8000 pour le serveur PHP interne
 EXPOSE 8000

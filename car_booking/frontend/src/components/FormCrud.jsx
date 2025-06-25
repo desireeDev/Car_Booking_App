@@ -43,7 +43,7 @@ function FormCrud({ action: initialAction }) {
   // Se déclenche au premier rendu et à chaque fois que 'selectedAction' change
   // (ce qui permet de rafraîchir la liste si on revient en mode 'read').
   useEffect(() => {
-    const fetchCars = async () => {
+   const fetchCars = async () => {
       try {
         const response = await fetch("http://localhost:8000/api/cars");
         if (!response.ok) {
@@ -58,7 +58,8 @@ function FormCrud({ action: initialAction }) {
       }
     };
 
-    // Charger les voitures uniquement si l'action actuelle est 'read'
+
+// Charger les voitures uniquement si l'action actuelle est 'read'
     if (selectedAction === "read") {
       fetchCars();
     }
@@ -99,34 +100,38 @@ function FormCrud({ action: initialAction }) {
   /**
    * Fonction pour envoyer une nouvelle voiture à l'API (opération POST).
    */
-  const createCar = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/api/cars", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          brand: formData.marque,
-          model: formData.modele,
-          licensePlate: formData.plaque,
-          isAvailable: formData.isAvailable,
-        }),
-      });
+ const createCar = async () => {
+  try {
+     console.log('Début création voiture');
+    const response = await fetch("http://localhost:8000/api/cars", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        brand: formData.marque,
+        model: formData.modele,
+        licensePlate: formData.plaque,
+        isAvailable: formData.isAvailable,
+      }),
+    });
 
-      if (!response.ok) {
-        throw new Error("Erreur lors de l'enregistrement de la voiture.");
-      }
-
-      const data = await response.json();
-      setMessage(`✅ ${data.message}`);
-      // Après création, réinitialiser le formulaire
-      setFormData({ id: "", marque: "", modele: "", plaque: "", isAvailable: true });
-    } catch (error) {
-      console.error("Erreur de création:", error);
-      setMessage(`❌ Une erreur est survenue lors de la création: ${error.message}`);
+    if (!response.ok) {
+      throw new Error("Erreur lors de l'enregistrement de la voiture.");
     }
-  };
+
+    const text = await response.text();
+    console.log('Réponse reçue');
+
+    const data = text ? JSON.parse(text) : { message: "Voiture créée avec succès." };
+
+    setMessage(`✅ ${data.message}`);
+    setFormData({ id: "", marque: "", modele: "", plaque: "", isAvailable: true });
+  } catch (error) {
+    console.error("Erreur de création:", error);
+    setMessage(`❌ Une erreur est survenue lors de la création: ${error.message}`);
+  }
+};
 
   /**
    * Fonction pour mettre à jour une voiture existante (opération PUT/PATCH).

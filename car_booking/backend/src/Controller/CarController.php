@@ -25,6 +25,13 @@ class CarController extends AbstractController
         $car->setModel($data['model']);
         $car->setLicensePlate($data['licensePlate']);
 
+   // Requete de vérification de la disponibilité
+    if (isset($data['isAvailable'])) {
+        $car->setIsAvailable($data['isAvailable']);
+    } else {
+        $car->setIsAvailable(true); // Valeur par défaut si non envoyé
+    }
+
         $em->persist($car);
         $em->flush();
 
@@ -44,12 +51,13 @@ class CarController extends AbstractController
                     'brand' => $car->getBrand(),
                     'model' => $car->getModel(),
                     'licensePlate' => $car->getLicensePlate(),
+                    'isAvailable' => $car->isAvailable(),
                 ];
             }
 
             return new JsonResponse($data);
         }
-    
+
     #[Route('/api/cars/{id}', name: 'delete_car', methods: ['DELETE'])]
     public function delete(int $id, EntityManagerInterface $em): JsonResponse
     {
@@ -64,4 +72,37 @@ class CarController extends AbstractController
 
         return new JsonResponse(['message' => 'Voiture supprimée'], 200);
     }
+
+    #[Route('/api/cars/{id}', name: 'update_car', methods: ['PUT'])]
+public function update(int $id, Request $request, EntityManagerInterface $em): JsonResponse
+{
+    $car = $em->getRepository(Car::class)->find($id);
+
+    if (!$car) {
+        return new JsonResponse(['error' => 'Voiture non trouvée'], 404);
+    }
+
+    $data = json_decode($request->getContent(), true);
+
+    if (isset($data['brand'])) {
+        $car->setBrand($data['brand']);
+    }
+
+    if (isset($data['model'])) {
+        $car->setModel($data['model']);
+    }
+
+    if (isset($data['licensePlate'])) {
+        $car->setLicensePlate($data['licensePlate']);
+    }
+
+    if (isset($data['isAvailable'])) {
+        $car->setIsAvailable($data['isAvailable']);
+    }
+
+    $em->flush();
+
+    return new JsonResponse(['message' => 'Voiture mise à jour avec succès'], 200);
+}
+
 }

@@ -23,6 +23,7 @@ services:
       - "8000:8000"                              # Symfony exposé sur le port 8000
     volumes:
       - ./car_booking/backend:/app
+     # -  /app/vendor      # Synchronisation du code
     environment:
       - DATABASE_URL=mysql://root:root@db:3306/car_booking
     depends_on:

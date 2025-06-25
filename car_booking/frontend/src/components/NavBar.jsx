@@ -34,7 +34,7 @@ function Navbar() {
         </ul>
 
 
-        <button className="add-car-button">Rerver une voiture</button>
+        <button className="add-car-button">Réserver une voiture</button>
       </div>
     </nav>
   );
