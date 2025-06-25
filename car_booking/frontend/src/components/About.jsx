@@ -19,9 +19,10 @@ function About() {
               Que ce soit pour un voyage, un déplacement professionnel ou un week-end, nous avons la voiture qu’il vous faut.
             </p>
           </div>
-          <button className="all-feature-car-button">Réserver une voiture</button>
+          <Link to="/reservation">
+            <button className="featured-car-button">Réserver une voiture</button>
+          </Link>
         </div>
-
         <div className="car-cards-container">
           {/* Carte véhicule 1 */}
           <div className="car-card">

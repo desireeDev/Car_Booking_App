@@ -35,7 +35,7 @@ class CarController extends AbstractController
         $em->persist($car);
         $em->flush();
 
-        return new JsonResponse(['message' => 'Car created successfully'], 201);
+        return new JsonResponse(['message' => 'Voiture créée avec succès'], 201);
     }
 
     #[Route('/api/cars', name: 'get_cars', methods: ['GET'])]
