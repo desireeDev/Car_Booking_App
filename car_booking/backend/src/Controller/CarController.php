@@ -64,4 +64,43 @@ class CarController extends AbstractController
 
         return new JsonResponse(['message' => 'Voiture supprimée'], 200);
     }
+
+    #[Route('/api/cars/{id}', name: 'update_car', methods: ['PUT'])]
+public function update(
+    Request $request,
+    EntityManagerInterface $entityManager,
+    int $id
+): JsonResponse {
+    // On récupère la voiture par son ID
+    $car = $entityManager->getRepository(Car::class)->find($id);
+
+    if (!$car) {
+        return new JsonResponse(['message' => 'Voiture non trouvée'], 404);
+    }
+
+    // On décode le JSON reçu
+    $data = json_decode($request->getContent(), true);
+
+    // On met à jour les champs si fournis
+    if (isset($data['brand'])) {
+        $car->setBrand($data['brand']);
+    }
+
+    if (isset($data['model'])) {
+        $car->setModel($data['model']);
+    }
+
+    if (isset($data['licensePlate'])) {
+        $car->setLicensePlate($data['licensePlate']);
+    }
+
+    if (isset($data['isAvailable'])) {
+        $car->setIsAvailable($data['isAvailable']);
+    }
+
+    $entityManager->flush();
+
+    return new JsonResponse(['message' => 'Voiture mise à jour avec succès']);
+}
+
 }

@@ -1,7 +1,6 @@
 // Import des hooks React nécessaires et de PropTypes pour la validation des props
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-// Import des styles CSS spécifiques à ce composant
 import "../styles/FormCrud.css";
 
 // Import des sous-composants spécifiques à chaque action CRUD
@@ -10,10 +9,11 @@ import CarFormUpdate from './CarFormUpdate';
 import CarFormDelete from './CarFormDelete';
 import CarTableRead from './CarTableRead';
 
+
 /**
  * Composant FormCrud
  * Gère les opérations CRUD (Create, Read, Update, Delete) pour les voitures.
- * L'action principale est sélectionnée via un menu déroulant.
+ * L'action principale est déterminée par la prop 'action' ou par les interactions internes (ex: bouton Modifier).
  * @param {string} initialAction - L'action initiale à afficher (par exemple, "read", "create").
  */
 function FormCrud({ action: initialAction }) {
@@ -28,20 +28,30 @@ function FormCrud({ action: initialAction }) {
     isAvailable: true, // Statut de disponibilité : true = disponible, false = réservée
   });
 
-  // État pour afficher les messages de retour à l'utilisateur (succès ou erreur)
+  // Message de retour (succès ou erreur)
   const [message, setMessage] = useState("");
 
-  // État pour stocker la liste des voitures récupérées de l'API (utilisée en mode 'read')
+  // Liste des voitures (affichée en mode read)
   const [carsList, setCarsList] = useState([]);
 
-  // État pour gérer l'action sélectionnée par l'utilisateur via le menu déroulant
+  // État interne pour gérer l'action active.
+  // Il est initialisé par la prop, mais peut changer via les interactions utilisateur.
   const [selectedAction, setSelectedAction] = useState(initialAction);
 
   // --- Effets secondaires (Hooks useEffect) ---
 
+  // Met à jour l'action sélectionnée si la prop initialAction change depuis le parent
+  // Cela permet de réagir si le composant parent change l'action active.
+  useEffect(() => {
+    setSelectedAction(initialAction);
+    // Réinitialise le formulaire et les messages lors du changement d'action externe
+    setFormData({ id: "", marque: "", modele: "", plaque: "", isAvailable: true });
+    setMessage("");
+  }, [initialAction]);
+
+
   // Effet pour récupérer la liste des voitures depuis l'API.
-  // Se déclenche au premier rendu et à chaque fois que 'selectedAction' change
-  // (ce qui permet de rafraîchir la liste si on revient en mode 'read').
+  // Se déclenche si l'action sélectionnée est 'read'.
   useEffect(() => {
     const fetchCars = async () => {
       try {
@@ -79,24 +89,6 @@ function FormCrud({ action: initialAction }) {
   };
 
   /**
-   * Gère le changement de l'action sélectionnée dans le menu déroulant.
-   * Réinitialise le formulaire et les messages à chaque changement d'action.
-   * @param {Object} e - L'événement de changement.
-   */
-  const handleActionChange = (e) => {
-    setSelectedAction(e.target.value);
-    // Réinitialise formData pour vider les champs ou préparer de nouvelles saisies
-    setFormData({
-      id: "",
-      marque: "",
-      modele: "",
-      plaque: "",
-      isAvailable: true,
-    });
-    setMessage(""); // Efface tout message précédent
-  };
-
-  /**
    * Fonction pour envoyer une nouvelle voiture à l'API (opération POST).
    */
   const createCar = async () => {
@@ -131,7 +123,6 @@ function FormCrud({ action: initialAction }) {
   /**
    * Fonction pour mettre à jour une voiture existante (opération PUT/PATCH).
    * Note: La logique de mise à jour réelle est à implémenter.
-   * Actuellement, elle affiche juste un message.
    */
   const updateCar = async () => {
     if (!formData.id) {
@@ -145,7 +136,7 @@ function FormCrud({ action: initialAction }) {
       if (formData.marque) updateData.brand = formData.marque;
       if (formData.modele) updateData.model = formData.modele;
       if (formData.plaque) updateData.licensePlate = formData.plaque;
-      // isAvailable est toujours envoyé car c'est un select
+      // isAvailable est toujours envoyé car c'est un select, donc il doit être inclus
       updateData.isAvailable = formData.isAvailable;
 
       const response = await fetch(`http://localhost:8000/api/cars/${formData.id}`, {
@@ -162,8 +153,9 @@ function FormCrud({ action: initialAction }) {
 
       const data = await response.json();
       setMessage(`✅ Voiture modifiée avec succès : ${data.message}`);
-      // Après mise à jour, réinitialiser le formulaire
+      // Après mise à jour, réinitialiser le formulaire et revenir en mode 'read'
       setFormData({ id: "", marque: "", modele: "", plaque: "", isAvailable: true });
+      setSelectedAction("read"); // Revenir en mode lecture après la modification
     } catch (error) {
       console.error("Erreur de mise à jour:", error);
       setMessage(`❌ Une erreur est survenue lors de la modification: ${error.message}`);
@@ -172,7 +164,7 @@ function FormCrud({ action: initialAction }) {
 
   /**
    * Fonction pour supprimer une voiture par son ID (opération DELETE).
-   * Utilisée par le formulaire de suppression.
+   * Utilisée par le formulaire de suppression par ID.
    */
   const deleteCarById = async () => {
     if (!formData.id) {
@@ -195,8 +187,9 @@ function FormCrud({ action: initialAction }) {
       // Filtrer la liste des voitures localement après suppression réussie
       setCarsList((prev) => prev.filter((car) => car.id !== formData.id));
       setMessage("🚮 Voiture supprimée avec succès !");
-      // Réinitialiser l'ID après suppression
+      // Réinitialiser l'ID après suppression et revenir en mode lecture
       setFormData({ ...formData, id: "" });
+      setSelectedAction("read"); // Revenir en mode lecture après la suppression
     } catch (error) {
       console.error("Erreur de suppression:", error);
       setMessage(`❌ Une erreur est survenue lors de la suppression: ${error.message}`);
@@ -219,11 +212,11 @@ function FormCrud({ action: initialAction }) {
     } else if (selectedAction === "delete") {
       await deleteCarById();
     }
-    // Si selectedAction est "read", le bouton "Soumettre" n'est pas affiché
+    // Le bouton "Soumettre" n'est pas affiché si selectedAction est "read"
   };
 
   /**
-   * Fonction de suppression d'une voiture depuis la liste (bouton "Supprimer" dans le tableau).
+   * Fonction de suppression d'une voiture directement depuis la liste (bouton "Supprimer" dans le tableau).
    * @param {string} id - L'ID de la voiture à supprimer.
    */
   const handleDelete = async (id) => {
@@ -263,8 +256,8 @@ function FormCrud({ action: initialAction }) {
           <CarTableRead 
             carsList={carsList} 
             handleDelete={handleDelete} 
-            setSelectedAction={setSelectedAction} 
-            setFormData={setFormData} 
+            setSelectedAction={setSelectedAction} // Permet à CarTableRead de changer l'action
+            setFormData={setFormData}             // Permet à CarTableRead de pré-remplir le formData
           />
         );
       default:
@@ -276,15 +269,8 @@ function FormCrud({ action: initialAction }) {
   return (
     <div className="crud-form-container">
       <form onSubmit={handleSubmit} className="form-crud">
-        <h2>Gestion des voitures</h2>
         
-        {/* Menu déroulant pour sélectionner l'action (CRUD) */}
-        <select value={selectedAction} onChange={handleActionChange} className="action-select">
-          <option value="read">Afficher les voitures</option>
-          <option value="create">Ajouter une voiture</option>
-          <option value="update">Modifier une voiture</option>
-          <option value="delete">Supprimer une voiture par ID</option>
-        </select>
+        {/* Ancien <select> pour l'action principale supprimé */}
 
         {/* Rend les champs du formulaire ou le tableau en fonction de l'action sélectionnée */}
         {renderCurrentFormOrTable()}
