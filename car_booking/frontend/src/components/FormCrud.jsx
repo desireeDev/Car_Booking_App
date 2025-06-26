@@ -280,16 +280,7 @@ function FormCrud({ action: initialAction }) {
   // --- Rendu du composant principal ---
   return (
     <div className="crud-form-container">
-      <form onSubmit={handleSubmit} className="form-crud">
-        <h2>Gestion des voitures</h2>
-        
-        {/* Menu déroulant pour sélectionner l'action (CRUD) */}
-        <select value={selectedAction} onChange={handleActionChange} className="action-select">
-          <option value="read">Afficher les voitures</option>
-          <option value="create">Ajouter une voiture</option>
-          <option value="update">Modifier une voiture</option>
-          <option value="delete">Supprimer une voiture par ID</option>
-        </select>
+      <form onSubmit={handleSubmit} className="form-crud">        
 
         {/* Rend les champs du formulaire ou le tableau en fonction de l'action sélectionnée */}
         {renderCurrentFormOrTable()}

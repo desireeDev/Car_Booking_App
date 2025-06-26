@@ -74,35 +74,35 @@ class CarController extends AbstractController
     }
 
     #[Route('/api/cars/{id}', name: 'update_car', methods: ['PUT'])]
-public function update(int $id, Request $request, EntityManagerInterface $em): JsonResponse
-{
-    $car = $em->getRepository(Car::class)->find($id);
+    public function update(int $id, Request $request, EntityManagerInterface $em): JsonResponse
+    {
+        $car = $em->getRepository(Car::class)->find($id);
 
-    if (!$car) {
-        return new JsonResponse(['error' => 'Voiture non trouvée'], 404);
+        if (!$car) {
+            return new JsonResponse(['error' => 'Voiture non trouvée'], 404);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        if (isset($data['brand'])) {
+            $car->setBrand($data['brand']);
+        }
+
+        if (isset($data['model'])) {
+            $car->setModel($data['model']);
+        }
+
+        if (isset($data['licensePlate'])) {
+            $car->setLicensePlate($data['licensePlate']);
+        }
+
+        if (isset($data['isAvailable'])) {
+            $car->setIsAvailable($data['isAvailable']);
+        }
+
+        $em->flush();
+
+        return new JsonResponse(['message' => 'Voiture mise à jour avec succès'], 200);
     }
-
-    $data = json_decode($request->getContent(), true);
-
-    if (isset($data['brand'])) {
-        $car->setBrand($data['brand']);
-    }
-
-    if (isset($data['model'])) {
-        $car->setModel($data['model']);
-    }
-
-    if (isset($data['licensePlate'])) {
-        $car->setLicensePlate($data['licensePlate']);
-    }
-
-    if (isset($data['isAvailable'])) {
-        $car->setIsAvailable($data['isAvailable']);
-    }
-
-    $em->flush();
-
-    return new JsonResponse(['message' => 'Voiture mise à jour avec succès'], 200);
-}
 
 }
