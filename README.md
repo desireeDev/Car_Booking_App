@@ -151,6 +151,24 @@ docker compose exec php php bin/console doctrine:migrations:migrate
 docker compose exec php composer install
 ```
 
+🔐 Proposition pour améliorer la sécurité dans Symfony :
+
+Protéger les routes sensibles avec des rôles
+
+Utiliser l’annotation `@IsGranted` ou la configuration `security.yaml` pour restreindre l’accès à certaines routes :
+
+```php
+// Exemple dans CarController.php
+/**
+ * @Route("/api/cars", methods={"POST"})
+ * @IsGranted("ROLE_ADMIN")
+ */
+public function createCar(Request $request) { ... }
+```
+
+➡️ Ainsi, seuls les admins pourront créer ou supprimer des voitures.
+
+
 <img width="950" alt="Hp" src="https://github.com/user-attachments/ass<img width="953" alt="Docker" src="https://github.com/user-attachments/assets/84f56b3c-3a0c-4ebd-bc82-a1e698485f1a" />
 ets/6506c5b7-449e-4d32-82c7-8c5e4e1dce4a" />
 <img width="955" alt="res" src="https://github.com/user-attachments/assets/5f6f4398-d624-49a6-80ca-581ceab0c76f" />
