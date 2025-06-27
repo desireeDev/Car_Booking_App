@@ -122,8 +122,8 @@ docker system prune -a
 
 🛑 Attention :
 
-* Cela supprime tous les conteneurs arrêtés, les images non utilisées, les volumes orphelins, etc.
-* Assurez-vous de ne pas supprimer des données en cours si vous travaillez avec des volumes persistants.
+ Cela supprime tous les conteneurs arrêtés, les images non utilisées, les volumes orphelins, etc.
+ Assurez-vous de ne pas supprimer des données en cours si vous travaillez avec des volumes persistants.
 
 ---
  🛠️ Migrations Symfony dans Docker
@@ -136,7 +136,7 @@ Si vous utilisez Symfony dans un conteneur Docker (avec Docker Compose par exemp
 docker compose exec php php bin/console make:migration
 ```
 
-#### 2. Appliquer les migrations à la base de données
+2. Appliquer les migrations à la base de données
 
 ```bash
 docker compose exec php php bin/console doctrine:migrations:migrate
@@ -151,8 +151,11 @@ docker compose exec php php bin/console doctrine:migrations:migrate
 docker compose exec php composer install
 ```
 
-<img width="950" alt="Hp" src="https://github.com/user-attachments/assets/6506c5b7-449e-4d32-82c7-8c5e4e1dce4a" />
+<img width="950" alt="Hp" src="https://github.com/user-attachments/ass<img width="953" alt="Docker" src="https://github.com/user-attachments/assets/84f56b3c-3a0c-4ebd-bc82-a1e698485f1a" />
+ets/6506c5b7-449e-4d32-82c7-8c5e4e1dce4a" />
 <img width="955" alt="res" src="https://github.com/user-attachments/assets/5f6f4398-d624-49a6-80ca-581ceab0c76f" />
+
+<img width="937" alt="element" src="https://github.com/user-attachments/assets/da1a546e-a0d9-4940-8c56-022ae2261c1f" />
 
 
 
