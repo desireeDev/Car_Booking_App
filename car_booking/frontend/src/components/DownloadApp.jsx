@@ -12,43 +12,43 @@ function DownloadApp() {
   return (
     <section className="download-app-section">
       <div className="download-app-content">
-        <h2>Download Our Car Dealer Application.</h2>
+        <h2>Téléchargez notre application de concessionnaire automobile.</h2>
         <p>
-          Car Dealer is the most enticing, creative, and multipurpose auto dealer
-          Premium WordPress Theme.
+          Car Dealer est le thème WordPress Premium de concessionnaire automobile
+          le plus attrayant, créatif et polyvalent.
         </p>
 
         <ul className="feature-list">
           <li>
             <i className="fas fa-check-circle check-icon"></i> {/* Icône de coche FontAwesome */}
-            What maintenance does an electric car need?
+            Quel entretien une voiture électrique nécessite-t-elle ?
           </li>
           <li>
             <i className="fas fa-check-circle check-icon"></i>
-            Analyze each tyre for any excess tread wear
+            Analysez chaque pneu pour toute usure excessive de la bande de roulement
           </li>
           <li>
             <i className="fas fa-check-circle check-icon"></i>
-            Access control put an electric vehicle charge.
+            Contrôle d'accès mis en place pour une recharge de véhicule électrique.
           </li>
         </ul>
 
-        <p className="download-now-text">Download Now On :</p>
+        <p className="download-now-text">Téléchargez maintenant sur :</p>
 
         <div className="download-buttons">
           <a href="#" className="download-button apple-store">
             <i class="fa-brands fa-apple" aria-hidden="true"></i>
-            Download On The <br />Apple Store
+            Télécharger sur l'<br />Apple Store
           </a>
           <a href="#" className="download-button google-play">
-            <i class="fa-brands fa-apple" aria-hidden="true"></i>
-            Get In On <br />Google Play
+            <i class="fa-brands fa-google-play" aria-hidden="true"></i> {/* Correction de l'icône ici */}
+            Disponible sur <br />Google Play
           </a>
         </div>
       </div>
 
       <div className="download-app-mockups">
-        <img src={phoneMockup1} alt="Phone App Mockup Login" className="mockup-main" />
+        <img src={phoneMockup1} alt="Maquette d'application de téléphone - Connexion" className="mockup-main" />
       </div>
     </section>
   );

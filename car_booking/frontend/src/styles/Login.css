@@ -1,32 +1,224 @@
-.login-container {
-  max-width: 400px;
-  margin: auto;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* src/styles/Login.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-bg-color: #f8f9fa; /* Très clair pour le fond de page */
+  --card-bg-color: #ffffff; /* Blanc pour le formulaire */
+  --text-color: #333333; /* Texte général */
+  --input-border-color: #dee2e6; /* Bordure des inputs */
+  --input-focus-border: #dc3545; /* Rouge pour le focus des inputs */
+  --button-bg-color: #dc3545; /* Rouge pour le bouton Log In */
+  --button-hover-bg-color: #c82333; /* Rouge plus foncé au survol */
+  --required-star-color: #dc3545; /* Rouge pour l'astérisque */
+  --link-color: #dc3545; /* Rouge pour les liens comme "Lost your password?" */
+  --error-color: #dc3545; /* Rouge pour les messages d'erreur */
+  --label-color: #212529; /* Couleur foncée pour les labels */
+}
+
+
+
+/* Wrapper pour centrer la carte de login sur la page */
+.login-page-wrapper {
+   font-family: 'Outfit', sans-serif;
+  margin: 0;
+  background-color: var(--primary-bg-color);
+  display: flex; /* Pour centrer le contenu verticalement si App.js est flex */
+  justify-content: center; /* Pour centrer le contenu horizontalement */
+  align-items: center; /* Pour centrer le contenu verticalement */
+  min-height: 100vh; /* S'assurer que le body prend toute la hauteur de l'écran */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Prend toute la hauteur du viewport pour centrer */
+  width: 100%;
+}
+
+/* Conteneur principal du formulaire (la carte blanche) */
+.login-card {
+  background-color: var(--card-bg-color);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Ombre plus douce */
+  width: 100%;
+  max-width: 450px; /* Largeur maximale comme sur l'image */
+  box-sizing: border-box;
+}
+
+.login-title {
+  font-size: 2.5rem; /* Taille du titre "Login" */
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 40px; /* Espace après le titre */
+  text-align: left; /* Alignement à gauche */
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 20px; /* Espace entre les groupes de formulaire */
 }
 
-.login-form input,
-.login-form button {
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+.form-group {
+  position: relative; /* Pour positionner l'étoile ou l'icône de l'œil */
+  margin-bottom: 5px; /* Petit espace entre les groupes */
 }
 
-.login-form button {
-  background-color: #0d6efd;
+.form-group label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--label-color);
+  margin-bottom: 8px;
+}
+
+.required-star {
+  color: var(--required-star-color); /* Couleur rouge pour l'astérisque */
+  margin-left: 3px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 14px 15px; /* Padding confortable */
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  color: var(--text-color);
+  box-sizing: border-box;
+  background-color: #fcfcfc; /* Légèrement grisé */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: var(--input-focus-border); /* Bordure rouge au focus */
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15); /* Ombre douce rouge au focus */
+}
+
+.login-input::placeholder {
+  color: #a0a0a0;
+}
+
+/* Styles spécifiques pour le groupe mot de passe avec l'icône de l'œil */
+.password-group .login-input {
+  padding-right: 45px; /* Espace pour l'icône de l'œil */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%; /* Centre verticalement */
+  transform: translateY(calc(50% + 5px)); /* Ajuste la position verticale pour être au milieu de l'input */
+  cursor: pointer;
+  color: var(--secondary-text-color);
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: var(--text-color);
+}
+
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px; /* Espace au-dessus du bouton et de la checkbox */
+  flex-wrap: wrap; /* Pour le responsive */
+}
+
+.login-button {
+  background-color: var(--button-bg-color);
   color: white;
+  padding: 12px 25px; /* Padding ajusté */
+  border: none;
+  border-radius: 4px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  min-width: 120px; /* Largeur minimale pour le bouton */
+}
+
+.login-button:hover {
+  background-color: var(--button-hover-bg-color);
+  box-shadow: 0 3px 10px rgba(220, 53, 69, 0.25);
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espace entre la checkbox et le label */
+}
+
+.remember-me input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--button-bg-color); /* Couleur de la checkbox cochée */
   cursor: pointer;
 }
 
-.login-error {
-  color: red;
+.remember-me label {
+  font-size: 0.95rem;
+  color: var(--secondary-text-color);
+  margin-bottom: 0; /* Supprime le margin-bottom par défaut du label */
+  cursor: pointer;
+}
+
+.login-error-message {
+  color: var(--error-color);
   font-size: 0.9rem;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.forgot-password-link {
+  color: var(--link-color);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-top: 25px; /* Espace au-dessus du lien */
+  text-align: left; /* Alignement à gauche */
+  display: block; /* Pour que le margin-top fonctionne et qu'il soit sur sa propre ligne */
+  transition: color 0.2s ease;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+  color: var(--button-hover-bg-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .login-card {
+    padding: 30px;
+    margin: 20px; /* Ajoute un peu de marge sur les petits écrans */
+  }
+
+  .login-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .login-input {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+
+  .form-options {
+    flex-direction: column; /* Empile le bouton et la checkbox */
+    align-items: flex-start; /* Aligne les éléments à gauche */
+    gap: 15px;
+  }
+
+  .login-button {
+    width: 100%; /* Le bouton prend toute la largeur */
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+
+  .forgot-password-link {
+    margin-top: 20px;
+  }
 }

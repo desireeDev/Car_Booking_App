@@ -47,7 +47,7 @@ final class ReservationController extends AbstractController
         $em->persist($reservation);
         $em->flush();
 
-        return new JsonResponse(['message' => '✅ Réservation créée avec succès']);
+        return new JsonResponse(['message' => 'Réservation créée avec succès']);
     }
 
      #[Route('/api/reservations', name: 'get_reservations', methods: ['GET'])]

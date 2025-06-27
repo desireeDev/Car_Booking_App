@@ -39,6 +39,8 @@ services:
       MYSQL_DATABASE: car_booking
     volumes:
       - db_data:/var/lib/mysql
+      - ./docker/sql:/docker-entrypoint-initdb.d
+
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
