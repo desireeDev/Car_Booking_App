@@ -173,7 +173,9 @@ public function createCar(Request $request) { ... }
 ets/6506c5b7-449e-4d32-82c7-8c5e4e1dce4a" />
 <img width="955" alt="res" src="https://github.com/user-attachments/assets/5f6f4398-d624-49a6-80ca-581ceab0c76f" />
 
+
 <img width="937" alt="element" src="https://github.com/user-attachments/assets/da1a546e-a0d9-4940-8c56-022ae2261c1f" />
 
+<img width="948" alt="Dashboard" src="https://github.com/user-attachments/assets/29efb4c6-bb1d-4d8d-9cd9-98d928f90ae4" />
 
 
