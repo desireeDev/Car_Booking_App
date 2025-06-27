@@ -109,6 +109,48 @@ API REST sécurisée avec **JWT Authenticator** (LexikJWTAuthenticationBundle).
   📱 Application mobile (React Native)
  ✉️ Notifications mail lors de la réservation
  🔔 Rappels de réservation
+
+🧼 Nettoyage Docker (important)
+
+> Lorsque vous développez avec Docker, il est essentiel de  nettoyer régulièrement les ressources inutilisées  pour éviter d'encombrer votre machine.
+
+✅ Commande à exécuter régulièrement :
+
+```bash
+docker system prune -a
+```
+
+🛑 Attention :
+
+* Cela supprime tous les conteneurs arrêtés, les images non utilisées, les volumes orphelins, etc.
+* Assurez-vous de ne pas supprimer des données en cours si vous travaillez avec des volumes persistants.
+
+---
+ 🛠️ Migrations Symfony dans Docker
+
+Si vous utilisez Symfony dans un conteneur Docker (avec Docker Compose par exemple), voici les **commandes de migration** à utiliser depuis l’intérieur du conteneur PHP :
+
+#### 1. Générer une nouvelle migration (après avoir modifié une entité)
+
+```bash
+docker compose exec php php bin/console make:migration
+```
+
+#### 2. Appliquer les migrations à la base de données
+
+```bash
+docker compose exec php php bin/console doctrine:migrations:migrate
+```
+
+📝 Remarques :
+
+ Assurez-vous que votre base de données est bien accessible (vérifiez `.env` et `DATABASE_URL`).
+ Vous pouvez aussi exécuter un `composer install` dans le conteneur si nécessaire :
+
+```bash
+docker compose exec php composer install
+```
+
 <img width="950" alt="Hp" src="https://github.com/user-attachments/assets/6506c5b7-449e-4d32-82c7-8c5e4e1dce4a" />
 <img width="955" alt="res" src="https://github.com/user-attachments/assets/5f6f4398-d624-49a6-80ca-581ceab0c76f" />
 
