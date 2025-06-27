@@ -1,0 +1,241 @@
+/* src/styles/DownloadApp.css */
+
+.download-app-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 40px; /* Rembourrage autour de la section */
+  background-color: #ffffff; /* Couleur de fond clair comme dans l'image */
+  min-height: 70vh; /* S'assure que la section a une certaine hauteur */
+  overflow: hidden; /* Pour gérer le positionnement des maquettes */
+}
+
+.download-app-content {
+  flex: 1; /* Prend l'espace disponible */
+  max-width: 600px; /* Limite la largeur du contenu textuel */
+  text-align: left; /* Alignement du texte à gauche */
+  margin-right: 80px; /* Espace entre le texte et les maquettes */
+  font-family: 'Outfit', sans-serif; /* Utilisez la police de votre choix, ou 'Ubuntu' si c'est votre police principale */
+}
+
+.download-app-content h2 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #222; /* Couleur du texte foncé */
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.download-app-content p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.feature-list {
+  list-style: none; /* Supprime les puces par défaut */
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 15px; /* Espace entre les éléments de la liste */
+}
+
+.check-icon {
+  color: #DA291C; /* Couleur rouge vif pour les coches, comme dans l'image */
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.download-now-text {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 20px; /* Espace entre les boutons de téléchargement */
+}
+
+.download-button {
+  display: flex;
+  flex-direction: column; /* Texte empilé */
+  align-items: flex-start; /* Alignement à gauche du texte */
+  justify-content: center;
+  padding: 15px 25px;
+  background-color: #222; /* Fond noir pour les boutons */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  min-width: 160px; /* Largeur minimale pour les boutons */
+  text-align: left;
+}
+
+.download-button:hover {
+  background-color: #000; /* Plus foncé au survol */
+}
+
+.download-button img {
+  height: 25px; /* Taille des icônes de store */
+  width: auto;
+  margin-bottom: 5px; /* Espace entre l'icône et le texte */
+}
+
+/* Section des maquettes de téléphone */
+.download-app-mockups {
+  position: relative;
+  width: 450px; /* Largeur du conteneur des maquettes */
+  height: 550px; /* Hauteur du conteneur des maquettes */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mockup-main {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80%; /* Largeur de la maquette principale */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Ombre pour la profondeur */
+  border-radius: 20px; /* Bords arrondis pour le téléphone */
+  z-index: 2; /* S'assure qu'il est au-dessus du secondaire */
+}
+
+.mockup-secondary {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(50px); /* Décalé vers la droite */
+  width: 220px; /* Largeur de la maquette secondaire */
+  opacity: 0.8; /* Légèrement transparent */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  z-index: 1; /* Derrière le principal */
+}
+
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 1200px) {
+  .download-app-section {
+    padding: 60px 20px;
+  }
+  .download-app-content {
+    margin-right: 40px;
+    max-width: 500px;
+  }
+  .download-app-content h2 {
+    font-size: 2.8rem;
+  }
+  .download-app-mockups {
+    width: 380px;
+    height: 480px;
+  }
+  .mockup-main {
+    width: 220px;
+  }
+  .mockup-secondary {
+    width: 190px;
+    transform: translateY(-50%) translateX(40px);
+  }
+}
+
+@media (max-width: 992px) {
+  .download-app-section {
+    flex-direction: column; /* Empile le contenu et les maquettes verticalement */
+    text-align: center; /* Centre le texte quand c'est empilé */
+    padding: 60px 20px;
+  }
+
+  .download-app-content {
+    margin-right: 0; /* Supprime la marge latérale */
+    margin-bottom: 50px; /* Ajoute de l'espace en bas du contenu textuel */
+    max-width: 100%; /* Prend toute la largeur disponible */
+  }
+
+  .download-app-content h2 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .download-app-content p {
+    text-align: center;
+  }
+
+  .feature-list {
+    display: flex; /* Utilise flexbox pour centrer les listes */
+    flex-direction: column;
+    align-items: center; /* Centre les éléments de la liste */
+  }
+  .feature-list li {
+    justify-content: center; /* Centre le texte et l'icône dans la liste */
+  }
+
+  .download-now-text {
+    text-align: center;
+  }
+
+  .download-buttons {
+    justify-content: center; /* Centre les boutons de téléchargement */
+  }
+
+  .download-app-mockups {
+    width: 100%; /* Prend toute la largeur disponible */
+    height: 400px; /* Réduit la hauteur pour mobile */
+    margin-top: 20px;
+    justify-content: center; /* Centre les maquettes horizontalement */
+  }
+
+  .mockup-main {
+    width: 200px; /* Taille des maquettes réduites */
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%) translateX(-40px); /* Ajuste la position du mockup principal */
+  }
+  .mockup-secondary {
+    width: 170px; /* Taille des maquettes réduites */
+    right: auto;
+    top: 50%;
+    transform: translateY(-50%) translateX(40px); /* Ajuste la position du mockup secondaire */
+  }
+}
+
+@media (max-width: 600px) {
+  .download-app-content h2 {
+    font-size: 2rem;
+  }
+  .download-app-content p {
+    font-size: 1rem;
+  }
+  .download-buttons {
+    flex-direction: column; /* Empile les boutons */
+    align-items: center; /* Centre les boutons */
+  }
+  .download-button {
+    width: 80%; /* Les boutons prennent plus de largeur */
+    max-width: 250px;
+  }
+  .download-app-mockups {
+    height: 300px; /* Réduit encore la hauteur */
+  }
+  .mockup-main {
+    width: 180px;
+    transform: translateY(-50%) translateX(-30px);
+  }
+  .mockup-secondary {
+    width: 150px;
+    transform: translateY(-50%) translateX(30px);
+  }
+}

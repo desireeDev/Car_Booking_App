@@ -3,6 +3,7 @@ import { useState } from "react";
 import FormCrud from "../components/FormCrud";
 import "../styles/Dashboard.css";
 
+
 function Dashboard() {
   const [showPopup, setShowPopup] = useState(false);
 
@@ -14,10 +15,12 @@ function Dashboard() {
       <div className="dashboard-header">
         <h1>Gestion des voitures</h1>
         <button className="create-btn" onClick={handlePopupOpen}>+ Créer une voiture</button>
+
       </div>
 
       {/* Affichage du tableau des voitures */}
       <FormCrud action="read" />
+
 
       {/* Popup du formulaire de création */}
       {showPopup && (
@@ -25,6 +28,7 @@ function Dashboard() {
           <div className="popup-content">
             <button className="close-btn" onClick={handlePopupClose}>×</button>
             <FormCrud action="create" />
+
           </div>
         </div>
       )}

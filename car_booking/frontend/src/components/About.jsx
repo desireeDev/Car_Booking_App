@@ -21,6 +21,7 @@ function About() {
           </div>
           <button className="all-feature-car-button">Réserver une voiture</button>
         </div>
+
         <div className="car-cards-container">
           {/* Carte véhicule 1 */}
           <div className="car-card">
@@ -103,9 +104,14 @@ function About() {
               </div>
             </div>
           </div>
+          
+        
+        
+        
         </div>
       </div>
     </div>
+    
   );
 }
 

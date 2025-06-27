@@ -1,7 +1,7 @@
 /* src/styles/About.css */
 
 .about-page-container {
-  font-family: sans-serif; /* Adjust font as needed */
+  font-family: 'ubuntu' sans-serif; /* Adjust font as needed */
   background-color: #f8f8f8; /* Light gray background */
   padding: 40px 0;
   position: relative; /* For positioning the floating car icon */

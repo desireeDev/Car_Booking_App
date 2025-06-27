@@ -1,33 +1,39 @@
-// src/pages/HomePage.jsx
 import { Link } from "react-router-dom";
 import "../styles/HomePage.css";
+import About from "./about"; 
+import DownloadApp from "./DownloadApp"; 
+
+
 
 // Composant HomePage
 function HomePage() {
   return (
+    <div>
     <div className="home-container">
+      {/* The car image will now be a background-image in CSS */}
       <div className="hero-section">
         <div className="hero-left">
-          <h2>RÉSERVEZ LA VOITURE DE VOS RÊVES EN UN SEUL CLIC</h2>
+          <small className="rent-car-text">- RENT A CAR</small>
+          <h1>LOUE TA VOITURE</h1>
           <p>
-            Découvrez notre large gamme de véhicules et trouvez celui qui vous convient. 
-            Donnez-lui une chance de briller sur la route avec la plateforme car_dealer.
+            Rent a comfortable and good-looking car for any period.
+            Corporate discounts are available.
           </p>
-        </div>
-        <div className="hero-right">
-          <img src="/src/assets/images/snedaii.png" alt="Voiture rouge" />
-          <h2>TOUT CE QUE VOUS DEVEZ SAVOIR SUR VOTRE VOITURE</h2>
-          <p>
-            Car Dealer est une plateforme qui vous permet de réserver votre voiture en ligne,
-            de gérer vos réservations et d’accéder à toutes les informations nécessaires concernant votre véhicule.
-          </p>
+          <div className="cta-buttons">
+            <Link to="/contacts" className="btn-contacts">
+              CONTACTS
+            </Link>
+            <Link to="/best-offers" className="btn-best-offers">
+              BEST OFFERS
+            </Link>
+          </div>
         </div>
       </div>
-      <div className="cta">
-        <Link to="/add-car" className="btn-command">
-          Commandez
-        </Link>
-      </div>
+
+    </div>
+    <About /> 
+    <DownloadApp />
+
     </div>
   );
 }

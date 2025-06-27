@@ -1,42 +1,141 @@
+/* Importation de la police Ubuntu si ce n'est pas déjà fait dans index.html ou un autre fichier CSS global */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
-.hero-section {
-  padding: 2rem;
+
+body {
+  font-family: 'Ubuntu', sans-serif; /* Applique Ubuntu à tout le corps ou à des éléments spécifiques */
 }
 
-.header {
+.home-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-}
+  background-color: #ffffff; /* Couleur de fond claire de l'image */
+  overflow: hidden;
 
-.p
-{
-  background-color: #ab2538;
-  color: white;
-  border-radius: 8px;
-  font-weight: bold;
+  /* Styles par défaut (grands écrans) de l'image d'arrière-plan */
+  background-image: url('../assets/images/image_d30321.jpg'); /* Votre chemin d'image */
+  background-position: left -150px center; /* Ajustez les valeurs pour décaler légèrement la voiture hors de l'écran à droite */
+  background-size: auto 100%; /* La hauteur s'adapte à 100% du conteneur, la largeur s'adapte proportionnellement */
+  background-repeat: no-repeat;
 }
 
 .hero-section {
+  padding: 0rem 2rem 0rem 10%; /* Augmentation du rembourrage à gauche pour éloigner le texte du bord */
+  position: relative;
+  z-index: 1; /* Garantit que le texte est au-dessus de l'image de la voiture */
+  display: flex; /* Pour aligner le contenu */
+  align-items: center; /* Pour aligner verticalement le contenu */
+  width: 100%; /* Prend toute la largeur pour le positionnement */
+}
+
+.hero-left {
+  max-width: 500px; /* Contrôle la largeur du bloc de texte */
+  color: #222222; /* Texte plus foncé pour le contenu principal, de l'image */
+}
+
+.rent-car-text {
+  font-size: 0.9rem;
+  color: #DA291C; /* Rouge vif de l'image pour "RENT A CAR" */
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  display: block; /* En fait un bloc pour prendre sa propre ligne */
+  font-weight: 500; /* Poids moyen pour ce texte */
+  text-transform: uppercase; /* Correspond au texte en majuscules dans l'image */
+}
+
+.hero-left h1 {
+  font-size: 6rem; /* Taille de police plus grande pour le titre principal */
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  font-weight: 700; /* Poids le plus gras pour le titre principal */
+  color: #222222; /* Couleur foncée pour les titres */
+}
+
+.hero-left p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #555555; /* Gris foncé légèrement plus clair pour le paragraphe */
+  font-weight: 400; /* Poids normal pour le paragraphe */
+}
+
+.cta-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
+  gap: 15px; /* Espace entre les boutons */
 }
 
-.hero-left h2 {
-  font-size: 3rem;
-  max-width: 400px;
-}
-
-.hero-right img {
-  width: 650px;
-}
-
-.btn-command {
-  background-color: #ab2538;
-  color: white;
+.btn-contacts,
+.btn-best-offers {
   padding: 1rem 2rem;
   text-decoration: none;
-  display: inline-block;
-  margin-top: 2rem;
+  font-weight: 500; /* Poids moyen pour le texte du bouton */
+  border-radius: 5px; /* Coins légèrement arrondis pour les boutons */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* Empêche le texte de se retourner à la ligne */
+  text-transform: uppercase; /* Correspond au texte en majuscules dans l'image */
+  font-size: 1rem;
+}
+
+.btn-contacts {
+  background-color: lab(77.39% 13.88 72.43); /* Couleur orange pour le bouton CONTACTS, de l'image */
+  color: white;
+  border: 2px solid #F7B42C;
+}
+
+.btn-contacts:hover {
+  background-color: #E0A029; /* Orange légèrement plus foncé au survol */
+  border-color: #E0A029;
+}
+
+.btn-best-offers {
+  background-color: transparent; /* Fond transparent */
+  color: #333333; /* Couleur de texte foncée pour ce bouton */
+  border: 2px solid #CCCCCC; /* Bordure gris clair de l'image */
+}
+
+.btn-best-offers:hover {
+  background-color: #EEEEEE; /* Fond gris clair au survol */
+  border-color: #BBBBBB; /* Bordure gris légèrement plus foncé au survol */
+}
+
+/* Ajustements responsifs */
+
+/* Tablettes et ordinateurs de bureau plus petits */
+@media (max-width: 685px) {
+  .home-container {
+    background-position: left -50px center; /* Moins de décalage vers la droite */
+    background-size: auto 90%; /* Voiture plus petite */
+  }
+  .hero-left h1 {
+    font-size: 3rem;
+  }
+  .hero-section {
+    padding-left: 5%;
+  }
+}
+
+
+/* Très petits écrans mobiles */
+@media (max-width: 480px) {
+  .hero-left h1 {
+    font-size: 1.8rem;
+  }
+  .hero-left p {
+    font-size: 0.9rem;
+  }
+  .btn-contacts,
+  .btn-best-offers {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  .hero-left {
+    margin: 1rem; /* Réduit la marge sur les plus petits écrans */
+    padding: 1rem; /* Réduit le rembourrage sur les plus petits écrans */
+  }
 }

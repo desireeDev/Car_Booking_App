@@ -1,0 +1,177 @@
+/* src/styles/ReservationsList.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* Variables CSS pour les couleurs */
+:root {
+  --primary-bg-color: #f8f9fa; /* Très clair, presque blanc, pour le fond de page */
+  --card-bg-color: #ffffff; /* Blanc pour les conteneurs principaux (table, calendrier) */
+  --primary-text-color: #333333;
+  --secondary-text-color: #6c757d; /* Texte gris clair pour les en-têtes de tableau */
+  --light-border-color: #e9ecef; /* Bordures très légères pour les séparations */
+  --accent-blue-header: #e0f2fe; /* Bleu très clair pour la bande d'en-tête */
+  --accent-blue-text: #007bff; /* Bleu principal pour les liens/boutons */
+  --button-red-border: #dc3545; /* Rouge pour le bouton d'annulation */
+}
+
+body {
+  margin: 0;
+  background-color: var(--primary-bg-color);
+  font-family: 'Outfit', sans-serif;
+  color: var(--primary-text-color);
+  line-height: 1.6;
+}
+
+/* Conteneur principal de la liste des réservations */
+.reservations-list-container {
+  max-width: 1200px;
+  margin: 50px auto; /* Centre le contenu */
+  padding: 0 25px;
+  box-sizing: border-box;
+}
+
+.reservations-list-container h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-text-color);
+  margin-bottom: 30px;
+  text-align: center; /* Centre le titre */
+}
+
+/* Style pour le message "Aucune réservation" */
+.reservations-list-container p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--secondary-text-color);
+  padding: 30px;
+  background-color: var(--card-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Conteneur du tableau, avec le même style de carte que le formulaire CRUD */
+.reservations-table-wrapper {
+  background-color: var(--card-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Ombre douce et prononcée */
+  margin-top: 30px; /* Espace après le calendrier ou le titre */
+  overflow-x: auto; /* Permet le défilement horizontal sur les petits écrans */
+}
+
+.reservations-table {
+  width: 100%;
+  border-collapse: separate; /* Permet border-spacing */
+  border-spacing: 0; /* Pas d'espace entre les cellules */
+  font-size: 1rem;
+  background-color: transparent; /* Le fond est sur le wrapper */
+  min-width: 800px; /* Largeur minimale pour éviter l'écrasement des colonnes */
+}
+
+.reservations-table th,
+.reservations-table td {
+  padding: 15px 20px; /* Padding confortable */
+  vertical-align: middle;
+  text-align: left;
+  border-bottom: 1px solid var(--light-border-color); /* Bordure de séparation légère */
+}
+
+/* En-tête du tableau */
+.reservations-table thead {
+  background-color: transparent;
+  color: var(--secondary-text-color);
+  font-weight: 600;
+}
+
+.reservations-table th {
+  position: sticky; /* Rendre les en-têtes collants si le tableau défile */
+  top: 0;
+  background-color: var(--card-bg-color);
+  z-index: 10;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+  text-transform: capitalize;
+}
+
+/* Corps du tableau (chaque ligne) */
+.reservations-table tbody tr {
+  background-color: var(--card-bg-color);
+  transition: background-color 0.2s ease;
+}
+
+.reservations-table tbody tr:hover {
+  background-color: #f0f2f5; /* Léger changement de fond au survol */
+}
+
+/* Dernière ligne du tableau (pas de bordure en bas) */
+.reservations-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Bouton "Annuler" */
+.cancel-btn {
+  background-color: transparent; /* Fond transparent par défaut */
+  border: 1px solid var(--button-red-border); /* Bordure rouge */
+  color: var(--button-red-border); /* Texte rouge */
+  padding: 8px 18px; /* Padding ajusté pour un look de bouton */
+  border-radius: 6px; /* Coins arrondis */
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  white-space: nowrap; /* Empêche le texte de se casser sur plusieurs lignes */
+}
+
+.cancel-btn:hover {
+  background-color: var(--button-red-border); /* Fond rouge au survol */
+  color: white; /* Texte blanc au survol */
+  box-shadow: 0 2px 5px rgba(220, 53, 69, 0.2); /* Ajoute une petite ombre au survol */
+}
+
+/* --- Styles spécifiques pour ReservationCalendar si vous le mettez à jour --- */
+/* Pour que le calendrier s'intègre aussi comme une "carte" */
+.reservation-calendar-container { /* Assurez-vous que votre Calendar component a ce className */
+  background-color: var(--card-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  margin-bottom: 30px; /* Espace avant le tableau */
+  display: flex;
+  justify-content: center; /* Centre le calendrier à l'intérieur */
+  /* Ajoutez des styles spécifiques si votre bibliothèque de calendrier génère ses propres classes */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .reservations-list-container {
+    margin: 30px auto;
+    padding: 0 15px;
+  }
+
+  .reservations-list-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .reservations-table th,
+  .reservations-table td {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+
+  .cancel-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reservations-table-wrapper {
+    margin-top: 20px;
+  }
+
+  .reservations-list-container h2 {
+    font-size: 1.3rem;
+  }
+}

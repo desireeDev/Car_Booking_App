@@ -1,0 +1,148 @@
+/* src/styles/Footer.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --footer-bg-color: #212121; /* Couleur de fond foncée du pied de page */
+  --footer-text-color: #ffffff; /* Couleur du texte général */
+  --footer-link-color: #ffffff; /* Couleur des liens de navigation */
+  --footer-brand-fast-color: #ffc107; /* Couleur jaune pour "FASTCAR" */
+  --footer-brand-rental-color: #cccccc; /* Couleur grise claire pour "RENTAL" */
+  --footer-divider-color: #444444; /* Couleur de la ligne de séparation */
+  --footer-copyright-color: #888888; /* Couleur du texte "© Created by" et "All rights Reserved" */
+}
+
+/* AUCUNE MODIFICATION DIRECTE DU BODY DANS CE FICHIER.
+   Le BODY doit être configuré pour le sticky footer dans votre CSS GLOBAL (ex: App.css ou index.css)
+   Voir les instructions ci-dessous. */
+
+.footer-container {
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
+  font-family: 'Outfit', sans-serif;
+  padding: 40px 60px 20px;
+  box-sizing: border-box;
+  width: 100%;
+  /* Suppression de position: fixed, bottom, left, right, z-index */
+  margin-top: auto; /* C'est la clé pour le "sticky footer" avec Flexbox */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.footer-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-brand .brand-fast {
+  color: var(--footer-brand-fast-color);
+}
+
+.footer-brand .brand-rental {
+  color: var(--footer-brand-rental-color);
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-top: -5px;
+}
+
+.footer-nav .footer-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-nav-item .footer-nav-link {
+  color: var(--footer-link-color);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-nav-item .footer-nav-link:hover {
+  color: var(--footer-brand-fast-color);
+}
+
+.footer-divider {
+  border: none;
+  border-top: 1px solid var(--footer-divider-color);
+  margin: 20px 0;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--footer-copyright-color);
+}
+
+.footer-copyright,
+.footer-rights {
+  margin: 5px 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 30px 30px 15px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 25px;
+  }
+
+  .footer-brand {
+    align-items: center;
+  }
+
+  .footer-nav .footer-nav-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 20px 20px 10px;
+  }
+
+  .footer-brand {
+    font-size: 1.3rem;
+  }
+
+  .footer-brand .brand-rental {
+    font-size: 0.8rem;
+  }
+
+  .footer-nav-item .footer-nav-link {
+    font-size: 0.9rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.8rem;
+  }
+}

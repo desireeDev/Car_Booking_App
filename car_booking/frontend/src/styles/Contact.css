@@ -1,79 +1,346 @@
-.contact-page {
-  min-height: 100vh;
-  background: linear-gradient(to bottom right, white, #fef2f2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+/* src/styles/Contact.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-text-color: #212529; /* Couleur du texte principal */
+  --secondary-text-color: #6c757d; /* Couleur du texte secondaire/description */
+  --accent-red: #dc3545; /* Rouge pour le bouton "Send Message" et la ligne "Get in touch" */
+  --input-bg-color: #f8f9fa; /* Fond clair pour les inputs */
+  --input-border-color: #e9ecef; /* Bordure légère pour les inputs */
+  --details-bg-color: #212529; /* Fond sombre pour la section des détails */
+  --details-text-color: #ffffff; /* Texte blanc pour la section des détails */
+  --details-link-color: #007bff; /* Bleu pour les liens dans les détails */
+  --social-icon-bg: #343a40; /* Fond des icônes sociales */
+  --social-icon-color: #ffffff; /* Couleur des icônes sociales */
 }
 
-.contact-container {
-  width: 100%;
+body {
+  font-family: 'Outfit', sans-serif;
+  margin: 0;
+  background-color: #f8f9fa; /* Fond de page global très clair */
+  color: var(--primary-text-color);
+  line-height: 1.6;
+}
+
+/* Conteneur global de la page de contact */
+.contact-page-wrapper {
+  max-width: 1400px; /* Largeur maximale du contenu comme dans l'image */
+  margin: 80px auto; /* Centre la page verticalement et horizontalement */
+  padding: 0 30px; /* Padding sur les côtés */
+  box-sizing: border-box;
+}
+
+/* En-tête principal de la page "Have Questions? Get In Touch!" */
+.contact-main-header {
+  text-align: center;
+  margin-bottom: 60px;
   max-width: 700px;
-  background-color: white;
-  border-radius: 1rem;
-  padding: 2rem;
-  border: 1px solid #fca5a5;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.contact-title {
-  font-size: 1.875rem;
-  font-weight: bold;
-  text-align: center;
-  color: #dc2626;
-  margin-bottom: 1.5rem;
+.contact-main-header .main-title {
+  font-size: 3.5rem; /* Grande taille de titre */
+  font-weight: 700;
+  color: var(--primary-text-color);
+  margin-bottom: 15px;
+  line-height: 1.1;
 }
 
-.contact-subtitle {
-  text-align: center;
-  color: #4b5563;
-  margin-bottom: 2rem;
+.contact-main-header .main-description {
+  font-size: 1.1rem;
+  color: var(--secondary-text-color);
+  line-height: 1.6;
 }
 
+/* Conteneur pour les deux colonnes (formulaire et détails) */
+.contact-content-container {
+  display: flex;
+  gap: 40px; /* Espace entre les colonnes */
+  background-color: #ffffff; /* Fond blanc pour l'ensemble du bloc de contenu */
+  border-radius: 12px; /* Coins arrondis */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08); /* Ombre douce */
+  overflow: hidden; /* Assure que les coins arrondis sont respectés pour les sections internes */
+}
+
+/* Section du formulaire (colonne gauche) */
+.contact-form-section {
+  flex: 2; /* Prend plus de place que la section des détails */
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.contact-form-section .form-section-subtitle {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent-red); /* Couleur rouge pour "Get in touch" */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 20px; /* Espace pour la ligne */
+}
+
+.contact-form-section .form-section-subtitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px; /* Longueur de la ligne */
+  height: 2px; /* Épaisseur de la ligne */
+  background-color: var(--accent-red);
+}
+
+.contact-form-section .form-section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-text-color);
+  margin-bottom: 15px;
+}
+
+.contact-form-section .form-section-description {
+  font-size: 1rem;
+  color: var(--secondary-text-color);
+  margin-bottom: 30px;
+}
+
+/* Formulaire */
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 20px; /* Espacement entre les groupes de formulaires */
+}
+
+.form-row {
+  display: flex;
+  gap: 20px; /* Espacement entre les champs sur la même ligne */
+  width: 100%;
+}
+
+.form-group {
+  flex: 1; /* Chaque groupe prend une part égale dans la ligne */
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-label {
-  font-size: 0.875rem;
   font-weight: 500;
-  color: #374151;
-  margin-bottom: 0.25rem;
-  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: var(--secondary-text-color); /* Couleur du texte des labels */
 }
 
 .contact-input,
 .contact-textarea {
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid var(--input-border-color);
+  border-radius: 8px;
+  background-color: var(--input-bg-color);
+  color: var(--primary-text-color);
   width: 100%;
-  padding: 0.5rem 1rem;
-  border: 1px solid #fecaca;
-  border-radius: 0.5rem;
-  outline: none;
-  transition: box-shadow 0.2s ease;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+  color: #a0a0a0;
 }
 
 .contact-input:focus,
 .contact-textarea:focus {
-  box-shadow: 0 0 0 3px #f87171aa;
+  outline: none;
+  border-color: var(--accent-red); /* Bordure rouge au focus */
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.contact-textarea {
+  resize: vertical; /* Permet de redimensionner verticalement */
+  min-height: 120px; /* Hauteur minimale */
 }
 
 .contact-button-container {
-  text-align: center;
+  margin-top: 20px;
 }
 
-.contact-button {
-  background-color: #dc2626;
-  color: white;
+.contact-submit-button { /* Le bouton d'envoi du message */
+  padding: 15px 35px;
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 0.5rem 1.5rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s ease;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
+  background-color: var(--accent-red); /* Fond rouge */
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.2);
 }
 
-.contact-button:hover {
-  background-color: #b91c1c;
+.contact-submit-button:hover {
+  background-color: #c82333; /* Rouge plus foncé au survol */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
+}
+
+/* Section des détails de contact (colonne droite) */
+.contact-details-section {
+  flex: 1; /* Prend une part plus petite */
+  background-color: var(--details-bg-color); /* Fond sombre */
+  color: var(--details-text-color);
+  padding: 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pour pousser les icônes sociales en bas */
+}
+
+.contact-details-section .details-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 15px; /* Espace pour la ligne sous le titre */
+  color: #ffffff; /* Assurer blanc */
+}
+
+.contact-details-section .details-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px; /* Longueur de la ligne */
+  height: 3px; /* Épaisseur de la ligne */
+  background-color: var(--accent-red); /* Ligne rouge sous le titre */
+}
+
+.detail-item {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: #e0e0e0; /* Texte légèrement grisé */
+}
+
+.detail-item.send-email,
+.detail-item.call-anytime {
+  font-weight: 600;
+  color: #ffffff; /* Rendre ces titres plus blancs */
+  margin-top: 25px; /* Espacement après les blocs de texte */
+  margin-bottom: 5px;
+}
+
+.detail-item.email-address,
+.detail-item.phone-number {
+  color: var(--details-link-color); /* Bleu pour les adresses email/numéros de tel */
+  font-weight: 500;
+  text-decoration: none; /* Enlever le soulignement si c'est un lien */
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.detail-item.email-address:hover,
+.detail-item.phone-number:hover {
+  color: #0056b3; /* Bleu plus foncé au survol */
+}
+
+/* Icônes sociales */
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px; /* Espace au-dessus des icônes */
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Cercle */
+  background-color: var(--social-icon-bg); /* Fond des icônes */
+  color: var(--social-icon-color); /* Couleur du texte/icône */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0; /* Empêche les icônes de rétrécir */
+}
+
+.social-icon:hover {
+  background-color: var(--accent-red); /* Changement de couleur au survol */
+  transform: translateY(-2px);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .contact-content-container {
+    flex-direction: column; /* Les colonnes passent en empilées */
+  }
+
+  .contact-form-section,
+  .contact-details-section {
+    padding: 30px; /* Moins de padding sur les petits écrans */
+  }
+
+  .form-row {
+    flex-direction: column; /* Les champs sur une ligne deviennent empilés */
+    gap: 15px;
+  }
+
+  .contact-main-header .main-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-page-wrapper {
+    margin: 50px auto;
+    padding: 0 15px;
+  }
+
+  .contact-main-header .main-title {
+    font-size: 2.2rem;
+  }
+
+  .contact-main-header .main-description {
+    font-size: 0.95rem;
+  }
+
+  .contact-form-section .form-section-title {
+    font-size: 1.8rem;
+  }
+
+  .contact-submit-button {
+    width: 100%; /* Le bouton prend toute la largeur */
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+
+  .social-icons {
+    justify-content: center; /* Centre les icônes sur les petits écrans */
+    flex-wrap: wrap; /* Permet aux icônes de passer à la ligne */
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-section,
+  .contact-details-section {
+    padding: 20px;
+  }
+
+  .contact-main-header .main-title {
+    font-size: 1.8rem;
+  }
+  .contact-form-section .form-section-title {
+    font-size: 1.5rem;
+  }
+  .detail-item {
+    font-size: 0.9rem;
+  }
+  .social-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
 }

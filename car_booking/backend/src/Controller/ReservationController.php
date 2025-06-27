@@ -49,4 +49,49 @@ final class ReservationController extends AbstractController
 
         return new JsonResponse(['message' => '✅ Réservation créée avec succès']);
     }
+
+     #[Route('/api/reservations', name: 'get_reservations', methods: ['GET'])]
+    public function getAll(EntityManagerInterface $em): JsonResponse
+    {
+        $reservations = $em->getRepository(Reservation::class)->findAll();
+
+        $data = [];
+        foreach ($reservations as $reservation) {
+            $car = $reservation->getCar();
+            $data[] = [
+                'id' => $reservation->getId(),
+                'name' => $reservation->getName(),
+                'email' => $reservation->getEmail(),
+                'startDate' => $reservation->getStartDate()->format('Y-m-d'),
+                'endDate' => $reservation->getEndDate()->format('Y-m-d'),
+                'car' => [
+                    'id' => $car->getId(),
+                    'brand' => $car->getBrand(),
+                    'model' => $car->getModel(),
+                    'licensePlate' => $car->getLicensePlate(),
+                ]
+            ];
+        }
+
+        return $this->json($data);
+    }
+
+    #[Route('/api/reservations/{id}', name: 'delete_reservation', methods: ['DELETE'])]
+    public function delete(int $id, EntityManagerInterface $em): JsonResponse
+    {
+        $reservation = $em->getRepository(Reservation::class)->find($id);
+
+        if (!$reservation) {
+            return $this->json(['error' => 'Réservation non trouvée'], 404);
+        }
+
+        // On rend la voiture de nouveau disponible
+        $car = $reservation->getCar();
+        $car->setIsAvailable(true);
+
+        $em->remove($reservation);
+        $em->flush();
+
+        return $this->json(['message' => '✅ Réservation annulée avec succès']);
+    }
 }

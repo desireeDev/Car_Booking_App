@@ -6,6 +6,9 @@ import Navbar from "./components/NavBar";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Reservation from "./components/Reservation";
+import ReservationsList from "./components/ReservationsList";
+import Login from "./components/Login";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -18,8 +21,13 @@ function App() {
         <Route path="/about" element={<About/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/reservation" element={<Reservation />} />
+        <Route path="/listereservations" element={<ReservationsList />} />
+        <Route path="/login" element={<Login />} />
+
 
       </Routes>
+      <Footer />
+
     </>
   );
 }

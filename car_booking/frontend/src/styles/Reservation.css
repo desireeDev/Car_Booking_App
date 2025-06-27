@@ -1,82 +1,242 @@
-.reservation-page {
-  min-height: 100vh;
-  background: linear-gradient(to bottom right, white, #fef2f2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+/* src/styles/Reservation.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* Variables CSS pour les couleurs, pratique pour la cohérence */
+:root {
+  --form-bg-color: #ffffff;
+  --form-border-color: #e0e0e0;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --accent-orange: #f7b42c; /* Couleur du "SEND A REQUEST" */
+  --accent-red: #cc3333; /* Couleur du bouton */
+  --input-border: #cccccc;
+  --input-focus-border: #888888;
 }
 
-.reservation-container {
-  width: 100%;
-  max-width: 700px;
-  background-color: white;
-  border-radius: 1rem;
+.reservation-page {
+  display: flex;
+  justify-content: flex-start; /* Aligne le formulaire à gauche */
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Hauteur minimale, soustraire la hauteur de la navbar si elle est fixe */
 
-  padding: 2rem;
-  border: 1px solid #fca5a5;
+  /* Styles de fond par défaut (pour les cas non couverts par les media queries ou comme fallback) */
+  background: no-repeat center right / cover, #FFFFFF; /* Position générique, cover, et fond blanc */
+  background-image: url('../assets/images/black-car-background.jpg'); /* REMPLACEZ CE CHEMIN par votre image locale */
+  
+  font-family: 'Outfit', sans-serif;
+  padding: 40px; /* Rembourrage général de la page */
+  box-sizing: border-box; /* Inclut le padding dans la largeur/hauteur */
+}
+
+/* Règles spécifiques basées sur votre JSON pour les différentes tailles d'écran */
+
+/* (min-width: 1200px) and (max-width: 1920px) */
+@media (min-width: 1200px) and (max-width: 1920px) {
+  .reservation-page {
+    background: no-repeat 48.44% 56.61% / cover, #FFFFFF;
+    background-image: url('../assets/images/black-car-background.svg'); 
+}
+}
+/* (max-width: 767px) - Mobile */
+@media (max-width: 767px) {
+  .reservation-page {
+    background: no-repeat 36.25% 49.49% / cover, #FFFFFF;
+    background-image: url('../assets/images/black-car-background.svg'); 
+    justify-content: center; /* Centre le formulaire sur les petits écrans */
+    padding: 30px 20px; /* Ajustement du padding */
+  }
+}
+
+/* (min-width: 768px) and (max-width: 1199px) - Tablette */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .reservation-page {
+    background: no-repeat 48.44% 56.61% / cover, #FFFFFF;
+    background-image: url('../assets/images/black-car-background.svg'); 
+    justify-content: center; /* Centre le formulaire */
+    padding: 30px 20px; /* Ajustement du padding */
+  }
+}
+
+/* (min-width: 1921px) - Écrans très larges */
+@media (min-width: 1921px) {
+  .reservation-page {
+    background: no-repeat 48.44% 56.61% / cover, #FFFFFF;
+    background-image: url('../assets/images/black-car-background.svg'); /* Optionnel: Utiliser une image @2x ici */
+  }
+}
+
+/* (min-width: 2560px) - Écrans ultra larges (4K+) */
+@media (min-width: 2560px) {
+  .reservation-page {
+    background: no-repeat 48.44% 56.61% / cover, #FFFFFF;
+    background-image: url('../assets/images/black-car-background.svg'); /* Optionnel: Utiliser une image @2x ici */
+  }
+}
+
+/* Media queries pour les écrans Retina (high-DPI) - Ces règles sont souvent utilisées pour des images de plus haute résolution */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 1200px),
+       only screen and (min-resolution: 144dpi) and (min-width: 1200px) {
+  .reservation-page {
+    background: no-repeat 48.44% 56.61% / cover, #FFFFFF;
+    background-image: url('../assets/images/black-car-background.svg'); /* Optionnel: Utiliser une image @2x ici */
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 1920px),
+       only screen and (min-resolution: 144dpi) and (min-width: 1920px) {
+  .reservation-page {
+    background: no-repeat 48.44% 56.61% / cover, #FFFFFF;
+    background-image: url('../assets/images/black-car-background.svg'); /* Optionnel: Utiliser une image @2x ici */
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 2560px),
+       only screen and (min-resolution: 144dpi) and (min-width: 2560px) {
+  .reservation-page {
+    background: no-repeat 48.44% 56.61% / cover, #FFFFFF;
+    background-image: url('../assets/images/black-car-background.svg'); /* Optionnel: Utiliser une image @2x ici */
+  }
+}
+
+/* Styles du formulaire (inchangés ou ajustés légèrement si nécessaire) */
+
+.reservation-container {
+  background-color: var(--form-bg-color);
+  padding: 40px 50px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 2;
+  margin-left: 5%;
 }
 
 .reservation-title {
-  font-size: 1.875rem;
-  font-weight: bold;
-  text-align: center;
-  color: #dc2626;
-  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.reservation-title::before {
+  content: '- SEND A REQUEST';
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent-orange);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .reservation-subtitle {
-  text-align: center;
-  color: #4b5563;
-  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 30px;
+  line-height: 1.5;
+  text-align: left;
 }
 
-.reservation-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.reservation-form div {
+  margin-bottom: 20px;
 }
 
 .reservation-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #374151;
-  margin-bottom: 0.25rem;
   display: block;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .reservation-input {
   width: 100%;
-  padding: 0.5rem 1rem;
-  border: 1px solid #fecaca;
-  border-radius: 0.5rem;
-  outline: none;
-  transition: box-shadow 0.2s ease;
+  padding: 12px 15px;
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+  font-size: 1rem;
+  color: var(--text-dark);
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-
+.reservation-input:focus {
+  border-color: var(--input-focus-border);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(204, 51, 51, 0.2);
+}
 
 .reservation-dates {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.reservation-dates > div {
+  flex: 1;
+  margin-bottom: 0;
 }
 
 .reservation-button-container {
   text-align: center;
+  margin-top: 30px;
 }
 
 .reservation-button {
-  background-color: #dc2626;
+  background-color: var(--accent-red);
   color: white;
-  font-weight: 600;
-  padding: 0.5rem 1.5rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s ease;
+  padding: 15px 30px;
   border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
 }
 
 .reservation-button:hover {
-  background-color: #b91c1c;
+  background-color: #a32929;
+  transform: translateY(-2px);
+}
+
+.reservation-recap {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.reservation-recap li {
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.reservation-recap li strong {
+  color: var(--accent-red);
+}
+
+/* Ajustements responsifs généraux (peuvent être affinés si les media queries spécifiques ne sont pas suffisants) */
+@media (max-width: 991px) {
+  .reservation-container {
+    max-width: 90%; /* Permet au formulaire d'être plus large sur tablette */
+    margin: 0 auto; /* Centre le formulaire */
+  }
+
+  .reservation-page {
+    justify-content: center; /* Centre le formulaire si l'espace est limité */
+    padding: 30px 20px; /* Ajuste le padding pour mobile */
+  }
+}
+
+@media (max-width: 600px) {
+  .reservation-container {
+    padding: 25px 30px;
+  }
+  .reservation-dates {
+    flex-direction: column; /* Empile les champs de date sur mobile */
+  }
 }
